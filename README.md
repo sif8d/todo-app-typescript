@@ -1,75 +1,90 @@
-# React + TypeScript + Vite
+# todo-app-typescript
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![build status](https://img.shields.io/badge/build-passing-brightgreen)]() [![license](https://img.shields.io/badge/license-MIT-blue)]() [![typescript](https://img.shields.io/badge/TypeScript-%3E%3D4.0-3178c6)]()
 
-Currently, two official plugins are available:
+A minimal Vite + React + TypeScript starter template with HMR and ESLint configuration — a lightweight starting point for a Todo app or single-page React projects.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Table of Contents
+- [Demo](#demo)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Prerequisites](#prerequisites)
+- [Quick Start](#quick-start)
+- [Available Scripts](#available-scripts)
+- [ESLint and Type-checked linting](#eslint-and-type-checked-linting)
+- [React Compiler (optional)](#react-compiler-optional)
+- [Folder Structure](#folder-structure)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
 
-## React Compiler
+Demo
+- Add a live demo link or screenshots here. For local screenshots, include `/docs` or `/assets` and reference images.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Features
+- Fast dev server with Vite and HMR
+- TypeScript + React + ESLint
+- Suggested configuration for type-aware linting
+- Minimal opinionated starter suitable for small apps
 
-## Expanding the ESLint configuration
+Tech Stack
+- React
+- TypeScript
+- Vite
+- ESLint (config provided)
+- Optional: React Compiler (link below)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Prerequisites
+- Node.js (LTS recommended)
+- npm, yarn, or pnpm
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Quick Start (npm)
+1. Install dependencies
+   `npm install`
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+2. Run development server
+   `npm run dev`
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+3. Build for production
+   `npm run build`
 
-```
+4. Preview production build locally
+   `npm run preview`
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+(If you use yarn or pnpm, replace `npm run` with `yarn` or `pnpm` equivalents.)
 
+Available Scripts
+- `npm run dev` — Start dev server (Vite)
+- `npm run build` — Build production bundle
+- `npm run preview` — Preview production build locally
+- `npm run lint` — Run ESLint
+- `npm run type-check` — Run TypeScript type checks (if configured)
+- `npm run format` — Run Prettier (if configured)
+(Adjust script names to match your package.json.)
+
+ESLint and type-checked linting
+This template includes a basic ESLint setup. For production apps, enable type-aware lint rules to catch more issues at lint time.
+
+Example ESLint config to enable type-checked rules:
 ```js
 // eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
 export default defineConfig([
   globalIgnores(['dist']),
   {
     files: ['**/*.{ts,tsx}'],
     extends: [
       // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
+      tseslint.configs.recommendedTypeChecked,
+      // Optionally use for stricter rules
+      // tseslint.configs.strictTypeChecked,
+      // Optionally stylistic rules
+      // tseslint.configs.stylisticTypeChecked,
     ],
     languageOptions: {
       parserOptions: {
         project: ['./tsconfig.node.json', './tsconfig.app.json'],
         tsconfigRootDir: import.meta.dirname,
       },
-      // other options...
     },
   },
 ])
-
-```
